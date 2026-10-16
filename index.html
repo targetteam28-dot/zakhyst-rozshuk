@@ -658,7 +658,8 @@ document.getElementById('lead').addEventListener('submit',async e=>{
   const quiz=answers.length?answers.map(x=>'• '+esc(x.q)+' — <b>'+esc(x.a)+'</b>').join('\n'):'• квіз не проходив';
   const msg=f.msg.value.trim();
   const text=
-'🔴 <b>Нова заявка — Розшук ТЦК</b>\n\n'+
+'🛡 <b>РЕЗЕРВ</b> · нова заявка\n'+
+'📂 Напрямок: <b>Резерв — зняття розшуку ТЦК</b>\n\n'+
 '👤 Ім\'я: <b>'+esc(f.name.value.trim()||'—')+'</b>\n'+
 '📞 Телефон: <b>'+esc(p.value.trim())+'</b>\n'+
 (msg?'💬 Ситуація: '+esc(msg)+'\n':'')+'\n'+
@@ -675,7 +676,7 @@ document.getElementById('lead').addEventListener('submit',async e=>{
   }catch(err){ok=false}
   if(ok){
     sent=true;
-    track('Lead',{content_name:'Rozshuk TCC lead',situation:answers[0]&&answers[0].a});
+    track('Lead',{content_name:'Rezerv lead',content_category:'Резерв',situation:answers[0]&&answers[0].a});
     document.getElementById('ok').style.display='block';document.getElementById('fail').style.display='none';
     btn.textContent='✓ Надіслано';
   }else{

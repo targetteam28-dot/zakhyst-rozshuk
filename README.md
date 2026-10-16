@@ -8,5 +8,5 @@ config.js   — піксель, токен бота, ID групи для зая
 logo.webp, lawyer.webp — логотип і фото юриста (Євген Орешечко)
 ```
 
-Заявки надходять у Telegram-групу з позначкою «🔴 Нова заявка — Розшук ТЦК».
+Заявки надходять у Telegram-групу з позначкою «🛡 РЕЗЕРВ · нова заявка» (напрямок: Резерв — зняття розшуку ТЦК).
 Події Meta Pixel: PageView, QuizStart, QuizStep, QuizComplete, ViewForm, Lead, Contact.
