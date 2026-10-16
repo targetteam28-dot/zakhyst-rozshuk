@@ -393,6 +393,15 @@ html.m-lock,html.m-lock body{overflow:hidden}
 
   <div class="divider"></div>
 
+  <!-- DOCS -->
+  <section class="sec">
+    <h2 class="h2">Відповіді ТЦК та рішення суду</h2>
+    <p class="sub">Розшук знято, статус «порушник» скасовано, штрафи закрито — документи з наших справ. Натисніть, щоб збільшити.</p>
+  </section>
+  <div class="car" data-car><button class="arr l" aria-label="Назад"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="track" id="docs"></div><button class="arr r" aria-label="Далі"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+
+  <div class="divider"></div>
+
   <!-- LAWYER -->
   <section class="sec">
     <h2 class="h2">Хто веде вашу справу</h2>
@@ -413,7 +422,7 @@ html.m-lock,html.m-lock body{overflow:hidden}
   <div class="divider"></div>
 
   <!-- REVIEWS -->
-  <section class="sec"><h2 class="h2">Що кажуть клієнти</h2></section>
+  <section class="sec"><h2 class="h2">Що пишуть клієнти після зняття розшуку</h2><p class="sub">Реальні переписки з клієнтами. Особисті дані приховані.</p></section>
   <div class="car" data-car><button class="arr l" aria-label="Назад"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="track" id="revs"></div><button class="arr r" aria-label="Далі"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M5 3L9 7L5 11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
 
   <div class="divider"></div>
@@ -526,6 +535,8 @@ html.m-lock,html.m-lock body{overflow:hidden}
   <p style="margin-top:10px">Хочете побачити зразок заздалегідь? Зателефонуйте: <a href="tel:+380930171020">+380 93 017 10 20</a>.</p>
 </div></div>
 
+<div class="lbx" id="lbx" role="dialog" aria-modal="true" aria-label="Перегляд зображення"><button class="mdl-x" type="button" data-close aria-label="Закрити">×</button><img id="lbxImg" alt=""></div>
+
 <div class="sticky" id="sticky"><button class="btn-o" data-go="#quiz">→ Перевірити, чи можна зняти розшук</button></div>
 
 <script>
@@ -551,11 +562,13 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b
 
 // MODALS
 const openM=el=>{el.classList.add('show');document.documentElement.classList.add('m-lock')};
-const closeM=()=>{document.querySelectorAll('.mdl.show').forEach(m=>m.classList.remove('show'));document.documentElement.classList.remove('m-lock')};
+const closeM=()=>{document.querySelectorAll('.mdl.show,.lbx.show').forEach(m=>m.classList.remove('show'));document.documentElement.classList.remove('m-lock')};
 document.addEventListener('click',e=>{
   const a=e.target.closest('[data-modal]');
   if(a){e.preventDefault();e.stopPropagation();openM(document.getElementById(a.dataset.modal));return}
-  if(e.target.closest('[data-close]')||e.target.classList.contains('mdl')){closeM()}
+  if(e.target.closest('[data-close]')||e.target.classList.contains('mdl')||e.target.classList.contains('lbx')){closeM();return}
+  const img=e.target.closest('.pshot img');
+  if(img){const L=document.getElementById('lbxImg');L.src=img.currentSrc||img.src;L.alt=img.alt;openM(document.getElementById('lbx'))}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
 
@@ -587,17 +600,10 @@ function doneQ(){
 }
 renderQ();
 
-// REVIEWS
-const revs=[
-  ['Андрій К.','Лютий 2026','Зняли розшук за 2 тижні. Все дистанційно, без жодного візиту до ТЦК. Дуже вдячний команді!','#1e63d6'],
-  ['Віталій М.','Січень 2026','Був у розшуку 4 місяці. Думав, що вже нічого не зробити. Команда «Захист UA» довела протилежне — статус знято за 18 днів.','#1f9d55'],
-  ['Олег П.','Грудень 2025','Працюю за кордоном, не міг повернутися. Все зробили дистанційно. Скасували штраф і зняли з розшуку. Рекомендую!','#f26a1b'],
-  ['Денис Л.','Жовтень 2025','Дуже швидко і чітко. Зв\'язались, пояснили, зробили — без зайвих слів. Рекомендую всім!','#7360f2'],
-  ['Наталія В.','Вересень 2025','Мій брат був у розшуку. Звернулися до «Захист UA» — проблему вирішили за 3 тижні. Дякуємо!','#e5484d'],
-  ['Сергій К.','Серпень 2025','Консультація онлайн — дуже зручно. Пояснили всі права та допомогли скласти документи.','#0f2340'],
-  ['Іван Г.','Липень 2025','Юрист Євген — справжній профі! Повернув мій документальний статус без жодних нервів.','#154fb3']
-];
-document.getElementById('revs').innerHTML=revs.map(([n,t,b,c])=>'<div class="rev-card"><div class="rev-head"><div class="rev-av" style="background:'+c+'">'+n.split(' ').map(w=>w[0]).join('').replace('.','')+'</div><div><div class="rev-name">'+n+'</div><div class="rev-src">'+t+'</div></div><div class="rev-stars">★★★★★</div></div><div class="rev-body">«'+b+'»</div></div>').join('');
+// REVIEWS + DOCS (скріни з хайлайтсів Instagram @zahyst_dp.ua)
+const docAlt=['Відповідь ТЦК: розшук знято за 14 днів без суду','Відповідь ТЦК: статус «Порушник військового обліку» скасовано','Рішення суду: зняття розшуку','Рішення суду: штраф 17 000 грн скасовано','Постанова про закриття справи про адмінправопорушення','Відповідь ТЦК: не є порушником правил військового обліку','Відповідь ТЦК: статус «Порушення правил військового обліку» відсутній'];
+document.getElementById('docs').innerHTML=docAlt.map((a,i)=>'<div class="pshot rshot"><img src="doc'+(i+1)+'.webp" alt="'+a+'" loading="lazy"></div>').join('');
+document.getElementById('revs').innerHTML=[1,2,3,4,5,6,7,8,9].map(i=>'<div class="pshot rshot"><img src="rev'+i+'.webp" alt="Переписка з клієнтом: розшук знято" loading="lazy"></div>').join('');
 
 // CAROUSELS
 document.querySelectorAll('[data-car]').forEach(car=>{
