@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk" class="ld-lock">
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -55,22 +55,7 @@ svg{display:block}
 .page{max-width:430px;margin:0 auto;background:var(--bg);min-height:100vh;overflow:hidden;padding-bottom:84px;box-shadow:0 20px 60px rgba(15,35,64,.14)}
 @media(min-width:600px){.page{margin:28px auto;border-radius:32px;min-height:auto}}
 
-/* LOADER */
-#loader{position:fixed;inset:0;background:#fff;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transition:opacity .6s,visibility .6s}
-#loader.out{opacity:0;visibility:hidden;pointer-events:none}
-#loader{touch-action:none;overscroll-behavior:contain}
-html.ld-lock,html.ld-lock body{overflow:hidden;height:100%}
 html.m-lock,html.m-lock body{overflow:hidden}
-.ld-logo{width:240px;opacity:0;animation:ldFadeIn .35s ease .05s forwards}
-.ld-name{font-family:var(--sans);font-size:13px;letter-spacing:.18em;color:#6a7890;margin-top:10px;opacity:0;animation:ldFadeIn .3s ease .2s forwards;text-transform:uppercase}
-.ld-bar{margin-top:22px;width:140px;height:2px;background:#e8edf4;border-radius:2px;overflow:hidden}
-.ld-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1a3a8f,#3a7de0);animation:ldBar .9s ease .1s forwards}
-.ld-dots{display:flex;gap:6px;margin-top:14px}
-.ld-dots i{width:6px;height:6px;border-radius:50%;background:#cdd5e0;animation:ldPulse 1.2s ease infinite}
-.ld-dots i:nth-child(2){animation-delay:.2s}
-.ld-dots i:nth-child(3){animation-delay:.4s}
-@keyframes ldFadeIn{to{opacity:1}}
-@keyframes ldBar{to{width:100%}}
 /* MODAL + LIGHTBOX */
 .mdl{position:fixed;inset:0;z-index:1000;background:rgba(15,35,64,.72);display:none;align-items:flex-end;justify-content:center}
 .mdl.show{display:flex}
@@ -83,7 +68,6 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .lbx img{max-width:100%;max-height:88vh;border-radius:12px;object-fit:contain}
 .lbx .mdl-x{background:rgba(255,255,255,.15);color:#fff;top:14px;right:14px}
 .pshot img,.case-ph img{cursor:zoom-in}
-@keyframes ldPulse{0%,100%{background:#cdd5e0;transform:scale(1)}50%{background:#1a3a8f;transform:scale(1.3)}}
 
 /* shared */
 .sec{padding:28px 18px 6px}
@@ -303,6 +287,17 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .lw-l li::before{content:'';position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--navy)}
 .rev-stars{color:#f5a623;font-size:13px;letter-spacing:1px;margin-left:auto}
 .field.area{height:78px;padding:12px 14px;resize:none;line-height:1.4}
+/* quiz intro + inline form */
+.q-intro{font-size:12.5px;font-weight:600;color:var(--green);background:#eefaf2;border-radius:8px;padding:7px 10px;margin-bottom:12px}
+.qf-in{width:100%;height:48px;border-radius:10px;border:1px solid #cfd8e4;background:#f8fafc;color:var(--text);padding:0 14px;font:16px var(--sans);margin-bottom:10px;outline:none}
+.qf-in:focus{border-color:var(--blue);background:#fff}
+.qf-in.err{border-color:var(--red);background:var(--red-bg)}
+.qf-c{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;line-height:1.4;color:var(--text3);margin:0 0 12px;cursor:pointer}
+.qf-c input{margin-top:1px;width:15px;height:15px;accent-color:var(--orange);flex-shrink:0}
+.qf-c a{color:var(--text2)}
+.qf-c.err{color:var(--red)}
+.qf-ok{display:none;text-align:center;font-size:15px;font-weight:600;color:var(--green);padding:10px 0 2px}
+.qf-fail{display:none;text-align:center;font-size:13.5px;color:var(--red);padding:8px 0 0}
 </style>
 </head>
 <body>
@@ -317,14 +312,6 @@ html.m-lock,html.m-lock body{overflow:hidden}
   <symbol id="i-viber" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="3.5" fill="#7360f2"/><path d="M7 3.5C9 3.5 10.5 5 10.5 7M7 5C8.5 5 9.5 6 9.5 7M6 7.5C6.5 8 7 8.5 7.5 8.3L8.5 9L10 9.5C10.2 8.5 9.5 7.5 9.5 7.5" stroke="#fff" stroke-width=".9" fill="none" stroke-linecap="round"/></symbol>
 </defs>
 </svg>
-
-<!-- LOADER -->
-<div id="loader">
-  <img class="ld-logo" src="logo.webp" alt="ЗАХИСТ UA">
-  <div class="ld-name">Завантаження</div>
-  <div class="ld-bar"><i></i></div>
-  <div class="ld-dots"><i></i><i></i><i></i></div>
-</div>
 
 <main class="page">
 
@@ -348,6 +335,13 @@ html.m-lock,html.m-lock body{overflow:hidden}
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2.5" y="5.5" width="7" height="5" rx="1" stroke="currentColor"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="currentColor"/></svg>
       <span>Ми ніколи не просимо дані картки чи коди з SMS</span>
     </p>
+
+    <div class="quiz" id="quiz" aria-live="polite">
+      <div class="q-intro">4 питання · 30 секунд · юрист скаже, чи є підстави зняти розшук</div>
+      <div class="q-top"><div class="sqs" id="sqs"><i class="on"></i><i></i><i></i><i></i></div><div class="q-step" id="qStep">Крок 1/4</div></div>
+      <div id="qBody"></div>
+    </div>
+
     <div class="deadline">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="10" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M9 6.5V10L11.3 11.5M7 1.5H11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       <span>Кожен день у розшуку — це <b>ризик зупинки на блокпосту</b>, примусової доставки до ТЦК та нових штрафів. Чим раніше почнемо — тим простіше зняти статус.</span>
@@ -357,11 +351,6 @@ html.m-lock,html.m-lock body{overflow:hidden}
       <div class="what-q">Що таке розшук ТЦК з юридичної точки зору?</div>
       <div class="what-a">Розшук — це <b>адміністративна процедура</b> пошуку військовозобов'язаних, які не з'явились за викликом. Сам факт розшуку <b>не означає кримінальної відповідальності</b>. Це статус, який можна оскаржити законними методами — особливо якщо ТЦК порушив порядок вручення повістки чи оголошення розшуку.</div>
       <div class="what-stat"><b>68%</b><span>розшуків оголошені з порушенням процедури — це ваш шанс на скасування</span></div>
-    </div>
-
-    <div class="quiz" id="quiz" aria-live="polite">
-      <div class="q-top"><div class="sqs" id="sqs"><i class="on"></i><i></i><i></i><i></i></div><div class="q-step" id="qStep">Крок 1/4</div></div>
-      <div id="qBody"></div>
     </div>
   </section>
 
@@ -544,25 +533,16 @@ html.m-lock,html.m-lock body{overflow:hidden}
 <div class="sticky" id="sticky"><button class="btn-o" data-go="#quiz">→ Перевірити, чи можна зняти розшук</button></div>
 
 <script>
-// LOADER
+// Без лоадера: сторінка показується одразу (in-app браузери FB/IG закривають за 1–2 с)
 (function(){
-  const ld=document.getElementById('loader'),root=document.documentElement;let done=false;
-  const block=e=>{if(!done)e.preventDefault()};
-  ['touchmove','wheel'].forEach(t=>document.addEventListener(t,block,{passive:false}));
-  const hide=()=>{
-    if(done)return;done=true;
-    root.classList.remove('ld-lock');ld.classList.add('out');
-    const tg=location.hash&&document.querySelector(location.hash.replace(/[^#\w-]/g,''));
-    if(tg)tg.scrollIntoView({block:'start'});else window.scrollTo(0,0);
-    ['touchmove','wheel'].forEach(t=>document.removeEventListener(t,block,{passive:false}));
-  };
-  const soon=()=>setTimeout(hide,700);
-  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',soon):soon();
-  setTimeout(hide,2000);
-  ld.addEventListener('click',hide);
+  const tg=location.hash&&document.querySelector(location.hash.replace(/[^#\w-]/g,''));
+  if(tg)tg.scrollIntoView({block:'start'});else window.scrollTo(0,0);
   window.addEventListener('pageshow',e=>{if(e.persisted&&!location.hash)window.scrollTo(0,0)});
 })();
-document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)document.querySelector(b.dataset.go).scrollIntoView({behavior:'smooth',block:'start'})});
+// Microsoft Clarity: кастомні події для воронки
+const cl=(ev)=>{try{clarity('event',ev)}catch(e){}};
+const clTag=(k,v)=>{try{clarity('set',k,String(v))}catch(e){}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){cl(b.id==='heroCta'?'cta_hero':b.closest('#sticky')?'cta_sticky':'cta_other');document.querySelector(b.dataset.go).scrollIntoView({behavior:'smooth',block:'start'})}});
 
 // MODALS
 const openM=el=>{el.classList.add('show');document.documentElement.classList.add('m-lock')};
@@ -593,14 +573,49 @@ function renderQ(){
   document.querySelectorAll('#qBody .opt').forEach(b=>b.onclick=()=>{
     b.classList.add('sel');
     const ans=b.textContent.trim(); answers[step]={q:Q[step].t,a:ans};
-    if(step===0){track('ViewContent',{content_name:'Quiz start',content_category:ans});track('QuizStart',{answer:ans},true)}
+    if(step===0){track('ViewContent',{content_name:'Quiz start',content_category:ans});track('QuizStart',{answer:ans},true);cl('quiz_start');clTag('situation',ans)}
     track('QuizStep',{step:step+1,question:Q[step].t,answer:ans},true);
+    cl('quiz_step_'+(step+1));
     setTimeout(()=>{step++;step<Q.length?renderQ():doneQ()},300)});
 }
 function doneQ(){
   track('QuizComplete',{situation:answers[0]&&answers[0].a,location:answers[1]&&answers[1].a,period:answers[2]&&answers[2].a,deferral:answers[3]&&answers[3].a},true);
-  document.getElementById('qStep').textContent='Готово ✓';
-  document.getElementById('qBody').innerHTML='<div class="q-title">Ваша ситуація схожа на ті, з якими ми вже працювали</div><p style="font-size:14px;line-height:1.55;color:var(--text2);margin-bottom:14px">Залиште номер — юрист зателефонує, представиться і пояснить, як можна зняти розшук у вашому випадку. Наш номер: <a href="tel:+380930171020" style="color:var(--navy2);white-space:nowrap;font-weight:700">+380 93 017 10 20</a></p><button class="btn-o" data-go="#final">→ Отримати консультацію</button>';
+  cl('quiz_complete');
+  document.getElementById('qStep').textContent='Останній крок';
+  document.getElementById('qBody').innerHTML=
+    '<div class="q-title">Ваша ситуація схожа на ті, з якими ми вже працювали</div>'+
+    '<p style="font-size:14px;line-height:1.55;color:var(--text2);margin-bottom:14px">Залиште номер — юрист зателефонує, представиться і безкоштовно пояснить, як можна зняти розшук у вашому випадку.</p>'+
+    '<form id="qLead" novalidate>'+
+      '<input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">'+
+      '<input class="qf-in" name="phone" type="tel" inputmode="tel" placeholder="Номер телефону" autocomplete="tel" id="qPhone">'+
+      '<input class="qf-in" name="name" type="text" placeholder="Ім\'я (необов\'язково)" autocomplete="given-name">'+
+      '<label class="qf-c" id="qConsentL"><input type="checkbox" id="qConsent" checked><span>Погоджуюсь на обробку персональних даних згідно з <a href="#privacy" data-modal="mPrivacy">політикою конфіденційності</a></span></label>'+
+      '<button class="btn-o" type="submit" id="qSubmit">→ Отримати безкоштовну консультацію</button>'+
+      '<p class="qf-ok" id="qOk">✓ Заявку прийнято. Юрист зателефонує вам протягом 3 годин у робочий час.</p>'+
+      '<p class="qf-fail" id="qFail">Не вдалося надіслати. Зателефонуйте нам: <a href="tel:+380930171020" style="color:var(--navy2);font-weight:700">093 017 10 20</a></p>'+
+    '</form>'+
+    '<p class="micro" style="justify-content:center">Або зателефонуйте: <a href="tel:+380930171020" style="color:var(--navy2);font-weight:700;margin-left:4px">+380 93 017 10 20</a></p>';
+  const qf=document.getElementById('qLead');
+  qf.querySelector('#qPhone').addEventListener('focus',()=>cl('quiz_form_focus'),{once:true});
+  qf.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(sent||qf.website.value)return;
+    const p=document.getElementById('qPhone'),c=document.getElementById('qConsent'),cL=document.getElementById('qConsentL'),btn=document.getElementById('qSubmit');
+    let bad=false;
+    if(p.value.replace(/\D/g,'').length<9){p.classList.add('err');bad=true}else p.classList.remove('err');
+    if(!c.checked){cL.classList.add('err');bad=true}else cL.classList.remove('err');
+    if(bad){(p.classList.contains('err')?p:c).focus();return}
+    btn.disabled=true;btn.style.opacity=.7;btn.textContent='Надсилаємо…';
+    const ok=await sendLead({name:qf.name.value,phone:p.value,msg:'',src:'форма в квізі'});
+    if(ok){
+      btn.style.display='none';document.getElementById('qOk').style.display='block';document.getElementById('qFail').style.display='none';
+      qf.querySelectorAll('input').forEach(i=>i.disabled=true);
+    }else{
+      document.getElementById('qFail').style.display='block';
+      btn.disabled=false;btn.style.opacity=1;btn.textContent='→ Отримати безкоштовну консультацію';
+    }
+  });
+  setTimeout(()=>{try{document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}},50);
 }
 renderQ();
 
@@ -639,33 +654,24 @@ const params=new URLSearchParams(location.search);
 const utm=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].map(k=>params.get(k)?k+': '+params.get(k):null).filter(Boolean);
 
 // CALL CLICKS -> Contact
-document.addEventListener('click',e=>{const a=e.target.closest('a[href^="tel:"]');if(a)track('Contact',{method:'phone',placement:a.closest('footer')?'footer':a.closest('header')?'header':'page'})});
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="tel:"]');if(a){track('Contact',{method:'phone',placement:a.closest('footer')?'footer':a.closest('header')?'header':'page'});cl('call_click')}});
 
 // FORM VIEW
 let formSeen=false;
-new IntersectionObserver(([e])=>{if(e.isIntersecting&&!formSeen){formSeen=true;track('ViewForm',{},true)}},{threshold:.4}).observe(document.getElementById('lead'));
+new IntersectionObserver(([e])=>{if(e.isIntersecting&&!formSeen){formSeen=true;track('ViewForm',{},true);cl('form_bottom_view')}},{threshold:.4}).observe(document.getElementById('lead'));
 
 // FORM -> Telegram
 const esc=t=>String(t||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 let sent=false;
-document.getElementById('lead').addEventListener('submit',async e=>{
-  e.preventDefault();
-  if(sent)return;
-  const f=e.target,p=document.getElementById('phoneF'),c=document.getElementById('consent'),cl=document.getElementById('consentL'),btn=document.getElementById('submitBtn');
-  if(f.website.value)return;
-  let bad=false;
-  if(p.value.replace(/\D/g,'').length<9){p.classList.add('err');bad=true}else p.classList.remove('err');
-  if(!c.checked){cl.classList.add('err');bad=true}else cl.classList.remove('err');
-  if(bad){(p.classList.contains('err')?p:c).focus();return}
-
-  btn.disabled=true;btn.style.opacity=.7;btn.textContent='Надсилаємо…';
+async function sendLead({name,phone,msg,src}){
   const quiz=answers.length?answers.map(x=>'• '+esc(x.q)+' — <b>'+esc(x.a)+'</b>').join('\n'):'• квіз не проходив';
-  const msg=f.msg.value.trim();
+  msg=(msg||'').trim();
   const text=
 '🛡 <b>РЕЗЕРВ</b> · нова заявка\n'+
-'📂 Напрямок: <b>Резерв — зняття розшуку ТЦК</b>\n\n'+
-'👤 Ім\'я: <b>'+esc(f.name.value.trim()||'—')+'</b>\n'+
-'📞 Телефон: <b>'+esc(p.value.trim())+'</b>\n'+
+'📂 Напрямок: <b>Резерв — зняття розшуку ТЦК</b>\n'+
+'📍 Джерело: '+esc(src)+'\n\n'+
+'👤 Ім\'я: <b>'+esc((name||'').trim()||'—')+'</b>\n'+
+'📞 Телефон: <b>'+esc(phone.trim())+'</b>\n'+
 (msg?'💬 Ситуація: '+esc(msg)+'\n':'')+'\n'+
 '📝 <b>Квіз:</b>\n'+quiz+'\n\n'+
 (utm.length?'📊 <b>UTM:</b>\n'+esc(utm.join('\n'))+'\n\n':'')+
@@ -680,7 +686,24 @@ document.getElementById('lead').addEventListener('submit',async e=>{
   }catch(err){ok=false}
   if(ok){
     sent=true;
-    track('Lead',{content_name:'Rezerv lead',content_category:'Резерв',situation:answers[0]&&answers[0].a});
+    track('Lead',{content_name:'Rezerv lead',content_category:'Резерв',situation:answers[0]&&answers[0].a,placement:src});
+    cl(src==='форма в квізі'?'lead_quiz':'lead_bottom');cl('lead');
+  }
+  return ok;
+}
+document.getElementById('lead').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(sent){document.getElementById('ok').style.display='block';return}
+  const f=e.target,p=document.getElementById('phoneF'),c=document.getElementById('consent'),cL=document.getElementById('consentL'),btn=document.getElementById('submitBtn');
+  if(f.website.value)return;
+  let bad=false;
+  if(p.value.replace(/\D/g,'').length<9){p.classList.add('err');bad=true}else p.classList.remove('err');
+  if(!c.checked){cL.classList.add('err');bad=true}else cL.classList.remove('err');
+  if(bad){(p.classList.contains('err')?p:c).focus();return}
+
+  btn.disabled=true;btn.style.opacity=.7;btn.textContent='Надсилаємо…';
+  const ok=await sendLead({name:f.name.value,phone:p.value,msg:f.msg.value,src:'форма внизу сторінки'});
+  if(ok){
     document.getElementById('ok').style.display='block';document.getElementById('fail').style.display='none';
     btn.textContent='✓ Надіслано';
   }else{
